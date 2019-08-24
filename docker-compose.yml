@@ -1,0 +1,26 @@
+version: "3"
+services:
+  php:
+    image: php:fpm-alpine
+    volumes:
+      - ./php/php.ini:/usr/local/etc/php/php.ini-production:rw
+      - ./php/php-fpm.conf:/usr/local/etc/php-fpm.conf:rw
+      - ./php/www.conf:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ./php/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
+      - ./php/log/:/var/log/php/:rw
+      - ./php/sock:/sock
+      - ./:/usr/share/nginx/html/laravel
+    ports:
+      - "9000:9000"
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/log:/var/log/nginx
+      - ./php/sock:/sock
+      - ./:/usr/share/nginx/html/laravel
+    ports:
+      - "80:80"
+      - "443:443"
+
