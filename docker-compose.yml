@@ -11,6 +11,7 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD}
     volumes:
       - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/conf.d:/etc/mysql/conf.d
   php:
     build:
       context: ./php
