@@ -1,7 +1,19 @@
 version: "3"
 services:
+  mariadb:
+    image: mariadb
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_HOST=localhost
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
   php:
-    image: php:fpm-alpine
+    build:
+      context: ./php
     volumes:
       - ./php/php.ini:/usr/local/etc/php/php.ini-production:rw
       - ./php/php-fpm.conf:/usr/local/etc/php-fpm.conf:rw
