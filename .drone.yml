@@ -37,6 +37,12 @@ steps:
   commands:
   - nginx -v
 
+- name: slack
+  image: plugins/slack
+  settings:
+    webhook: ${SLACK_WEBHOOK}
+    channel: ${SLACK_CHANNEL}
+
 services:
 - name: database
   image: mariadb
