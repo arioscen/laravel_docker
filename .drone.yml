@@ -43,6 +43,19 @@ steps:
     webhook: ${SLACK_WEBHOOK}
     channel: ${SLACK_CHANNEL}
 
+- name: line
+  image: appleboy/drone-line
+  environment:
+    LINE_CHANNEL_SECRET: ${LINE_CHANNEL_SECRET}
+    LINE_CHANNEL_TOKEN: ${LINE_CHANNEL_TOKEN}
+    PLUGIN_TO_GROUP: ${PLUGIN_TO_GROUP}
+    PLUGIN_MESSAGE: |
+      test success
+      ${DRONE_REPO}
+      ${DRONE_COMMIT_BRANCH}
+      ${DRONE_COMMIT_SHA}
+      ${DRONE_COMMIT_MESSAGE}
+
 services:
 - name: database
   image: mariadb
