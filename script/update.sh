@@ -2,8 +2,11 @@
 SCRIPT_PATH=$(readlink -f "$0")
 SCRIPT_FOLDER_PATH=$(dirname "$SCRIPT_PATH")
 LARAVEL_PATH=$(dirname "$SCRIPT_FOLDER_PATH")
-docker run --rm -i -t -v $LARAVEL_PATH:/app -v /tmp:/tmp composer install
-docker-compose exec php php /usr/share/nginx/html/laravel/artisan migrate
-docker-compose exec php php /usr/share/nginx/html/laravel/artisan db:seed
-docker run --rm -v $LARAVEL_PATH/:/home/node/app -w /home/node/app node npm install
-docker run --rm -v $LARAVEL_PATH/:/home/node/app -w /home/node/app node npm run production
+cd $LARAVEL_PATH
+git checkout branch master
+git pull -u origin master
+sudo docker run --rm -v $LARAVEL_PATH:/app -v /tmp:/tmp composer install
+sudo docker-compose exec php php /usr/share/nginx/html/laravel/artisan migrate
+sudo docker-compose exec php php /usr/share/nginx/html/laravel/artisan db:seed
+sudo docker run --rm -v $LARAVEL_PATH/:/home/node/app -w /home/node/app node npm install
+sudo docker run --rm -v $LARAVEL_PATH/:/home/node/app -w /home/node/app node npm run production
