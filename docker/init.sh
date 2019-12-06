@@ -10,3 +10,5 @@ chmod 777 -R $LARAVEL_PATH/storage
 # sudo docker run --rm -v $LARAVEL_PATH:/app -v /tmp:/tmp composer install --ignore-platform-reqs
 # sudo docker-compose up -d
 # sudo docker-compose exec php php /usr/share/nginx/html/laravel/artisan key:generate
+
+# sudo sh $SCRIPT_FOLDER_PATH/update.sh
